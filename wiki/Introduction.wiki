@@ -16,17 +16,17 @@ To provide your desktop application with autoupdating capabilities just copy nla
 
 Then replace the shortcuts (start menu or desktop) to your application for references to nlaunch.exe
 
-Thats all.
+That's all.
 
 Really.
 
-From now on, everytime that the user runs your application, the following actions will take place:
+From now on, every time that the user runs your application, the following actions will take place:
 
 1. NLaunch checks if a new version of the application exists.
 This is done by looking for all the files named after the following convention: `Test.App-1.2.3.4.zip` where the first part of the filename is derived from the name of the executable configured in the applicationExe node and the second part specifies the version contained in the zip file.
 Once that the version of the last updated is gotten, it is compared with the version of the current application executable and it is decided if it needs to be updated or not.
 
-2. If acording to the versions information an update is required, then NLaunch do the folowing:
+2. If acording to the versions information an update is required, then NLaunch do the following:
   * downloads (or copy) the zip file containing the update to a local temp directory
   * copy the contents of the existing installation into a subdirectory called `PreviousVersion` within the application directory
   * deletes everything that does not belong to nhlaunch itself

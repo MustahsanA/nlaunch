@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<launcher>
+  <protocol>ftp</protocol>
+  <updatesLocation>ftp://user%40server:password123@server.com/</updatesLocation>
+  <applicationExe>Test.App.exe</applicationExe>
+</launcher>

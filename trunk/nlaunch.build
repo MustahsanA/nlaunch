@@ -1,0 +1,117 @@
+﻿<?xml version="1.0"?>
+<project name="NLaunch" default="all">
+
+  <property name="app.dir" value="src" />
+  <property name="test.dir" value="src" />
+  <property name="tools.dir" value="tools" />
+  <property name="solution.file" value="nlaunch.sln" />
+
+  <property name="ilmerge.dir" value="c:\Program Files\Microsoft\ILMerge" />
+  <property name="build.dir" value="build" />
+
+  <property name="project.name" value="NLaunch" />
+  <property name="project.title" value="Unobtrusive .NET desktop application updater" />
+  <property name="baseversion" value="0.1" />
+  <property name="project.company" value="Germán Schuager" />
+  <property name="project.description" value="Unobtrusive .NET desktop application updater" />
+  <property name="project.copyright" value="Copyright (c) 2009 Germán Schuager" />
+
+  <property name="project.version" value="${baseversion}.0.${svn.revision}" dynamic="true" />
+  <property name="nant.settings.currentframework" value="net-3.5" />
+  
+  <!-- default configuration -->
+  <property name="project.config" value="release" />
+  <!-- debug|release -->
+
+  <if test="${file::exists('local.properties.xml')}">
+    <echo message="Loading local.properties.xml" />
+    <include buildfile="local.properties.xml" />
+  </if>
+  
+  <target name="all" depends="compile, tests" />
+
+  <target name="make.new.dir">
+    <delete dir="${dir.name}" if="${directory::exists('${dir.name}')}"/>
+    <mkdir dir="${dir.name}" />
+  </target>
+
+  <target name="find-svninfo">
+    <!-- For adding SVN revision to builds -->
+    <property name="svn.revision" value="0" overwrite="false" />
+    <!-- try to update the revision -->
+    <exec
+			program="svn"
+			commandline='info "${project::get-base-directory()}" --xml'
+			output="_revision.xml"
+			failonerror="false"/>
+    <xmlpeek
+			file="_revision.xml"
+			xpath="/info/entry/@revision"
+			property="svn.revision"
+			failonerror="false"/>
+    <delete file="_revision.xml" failonerror="false" />
+    <echo message="INFO: Using Subversion revision number: ${svn.revision}"/>
+  </target>
+
+  <!-- Compile target -->
+  <target name="compile"
+          depends="generate-assemblyinfo"
+          description="Compiles the application.">
+
+    <property name="dir.name" value="${build.dir}" />
+    <call target="make.new.dir" />
+
+    <echo message="Build Directory is ${build.dir}" />
+
+    <exec program="${framework::get-framework-directory(framework::get-target-framework())}\msbuild.exe"
+		commandline="${solution.file} /t:Clean /t:Build /p:Configuration=${project.config} /nologo /v:q" workingdir="." />
+
+	<property name="project.output.dir" value="${app.dir}\NLaunch\bin\${project.config}" />
+	<exec program="${ilmerge.dir}\ilmerge.exe"
+		  commandline="/target:winexe /ndebug /out:${build.dir}\nlaunch.exe ${project.output.dir}\nlaunch.exe ${project.output.dir}\ICSharpCode.SharpZipLib.dll" />
+	<copy todir="${build.dir}">
+		<fileset basedir="${project.output.dir}">
+			<include name="nlaunch.xml" />
+		</fileset>
+	</copy>	
+		  
+	<!--
+    <copy todir="${build.dir}">
+      <fileset basedir="${app.dir}\NLaunch\bin\${project.config}">
+        <include name="**\*.*" />
+        <exclude name="*vshost*" />
+        <exclude name="*.pdb" />
+      </fileset>
+    </copy>
+	-->
+
+  </target>
+
+  <!-- Generates assembly info -->
+  <target name="generate-assemblyinfo"
+          depends="find-svninfo">
+    <property name="assemblyinfo.cs" value="${path::combine(app.dir,'AssemblyInfo.cs')}" />
+    <attrib file="${assemblyinfo.cs}" readonly="false" />
+    <asminfo output="${assemblyinfo.cs}" language="CSharp">
+      <imports>
+        <import namespace="System.Reflection" />
+      </imports>
+      <attributes>
+        <attribute type="AssemblyCopyrightAttribute" value="${project.copyright}" />
+        <attribute type="AssemblyVersionAttribute" value="${project.version}" />
+        <attribute type="AssemblyInformationalVersionAttribute" value="${project.version}" />
+        <attribute type="AssemblyTitleAttribute" value="${project.name}" />
+        <attribute type="AssemblyCompanyAttribute" value="${project.company}" />
+        <attribute type="AssemblyProductAttribute" value="${project.name}" />
+        <attribute type="AssemblyDescriptionAttribute" value="${project.description}" />
+      </attributes>
+    </asminfo>
+  </target>
+  
+  <target name="tests"> 
+    <exec basedir="${tools.dir}\nunit"
+      program="nunit-console.exe"
+      commandline="${test.dir}\NLaunch.Tests\bin\${project.config}\NLaunch.Tests.dll" />
+  </target>
+
+</project>

@@ -1,0 +1,2 @@
+#labels intro
+NLaunch is designed to be easily bundled with existing applications in order to provide them with autoupdating capabilities.

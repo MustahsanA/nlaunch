@@ -12,6 +12,6 @@ The configuration file must have the same file name as the NLaunch executable bu
 
 (1)   `protocol`: `ftp` or `local` are supported
 
-(2)   `updatesLocation`: if protocol is ftp here goes the ftp url with the authentication credentials; if protocol is local here goes the the full path of the local folder that will contain the updates
+(2)   `updatesLocation`: if protocol is `ftp` here goes the ftp url with the authentication credentials and remote directory included; if protocol is `local` here goes the the full path of the local folder that will contain the updates
 
 (3)   `applicationExe`: filename of the main executable of the application.

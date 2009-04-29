@@ -11,7 +11,7 @@ To provide your desktop application with autoupdating capabilities just copy nla
 </nlaunch>
 }}}
 
-Then replace the shortcuts (start menu or desktop) to your application for references to nlaunch.exe
+Then replace the shortcuts (start menu or desktop) to your application with references to nlaunch.exe
 
 That's all.
 

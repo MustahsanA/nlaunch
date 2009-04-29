@@ -1,5 +1,5 @@
 #labels Featured
-To provide your desktop application with autoupdating capabilities just copy nlaunch.exe and nlaunch.xml to the target installation directory (this files can be both renamed but they must have the same filename)
+To provide your desktop application with autoupdating capabilities just copy nlaunch.exe and nlaunch.xml to the target installation directory (this files can be both renamed but they must have the same filename), and modify the configuration file to suit your needs:
 
 *nlaunch.xml* (see ConfigurationReference)
 {{{
@@ -24,7 +24,7 @@ From now on, every time that the user runs your application, the following actio
 Test.App-1.2.3.4.zip
 }}}
 where the first part of the filename is derived from the name of the executable configured in the applicationExe node and the second part specifies the version contained in the zip file.
-Once that the version of the last updated is gotten, it is compared with the version of the current application executable and it is decided if it needs to be updated or not.
+Once that the version of the last updated is obtained, it is compared with the version of the current application executable and it is decided if it needs to be updated or not.
 
 *2. If acording to the versions information an update is required, then the update is downloaded and activated.* This is done through the the following steps:
   * downloads (or copy) the zip file containing the update to a local temp directory

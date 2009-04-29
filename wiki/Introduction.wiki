@@ -22,14 +22,19 @@ Really.
 
 From now on, everytime that the user runs your application, the following actions will take place:
 
-# NLaunch checks if a new version of the application exists.
+1. NLaunch checks if a new version of the application exists.
 This is done by looking for all the files named after the following convention: `Test.App-1.2.3.4.zip` where the first part of the filename is derived from the name of the executable configured in the applicationExe node and the second part specifies the version contained in the zip file.
 Once that the version of the last updated is gotten, it is compared with the version of the current application executable and it is decided if it needs to be updated or not.
 
-# If acording to the versions information an update is required, then NLaunch do the folowing:
-## downloads (or copy) the zip file containing the update to a local temp directory
-## copy the contents of the existing installation into a subdirectory called `PreviousVersion` within the application directory
-## deletes everything that does not belong to nhlaunch itself
+2. If acording to the versions information an update is required, then NLaunch do the folowing:
+  * downloads (or copy) the zip file containing the update to a local temp directory
+  * copy the contents of the existing installation into a subdirectory called `PreviousVersion` within the application directory
+  * deletes everything that does not belong to nhlaunch itself
+  * unzip the downloaded zip file to the application target directory
+  * restores previous application configuration (Test.App.exe.config in this case) from the PreviousVersion directory
+
+3. The original application is launched and NLaunch ends its work.
+
 
 
 ==Configuration reference==

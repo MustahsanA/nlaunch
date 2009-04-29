@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<nlaunch>
+  
+  <!-- ftp | local -->
+  <protocol>ftp</protocol>
+  
+  <!-- if protocol=ftp ==> ftp://user:password@server.com/dir -->
+  <!-- if protocol=local ==> C:\Updates -->
+  <updatesLocation>ftp://user%40server:password123@server.com/</updatesLocation>
+  
+  <!-- name of the application executable -->
+  <applicationExe>Test.App.exe</applicationExe>
+  
+</nlaunch>

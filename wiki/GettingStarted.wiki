@@ -35,5 +35,5 @@ Once that the version of the last updated is obtained, it is compared with the v
 
 *3. The original application is launched and NLaunch ends its work.*
 
-
+===Deploying updates===
 To deploy un update, just copy a new file named after the right convention (`Test.App-1.2.0.0.zip`) and the next time that the user starts your application, it will be downloaded and installed.

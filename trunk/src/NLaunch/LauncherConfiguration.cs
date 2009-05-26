@@ -5,6 +5,7 @@ namespace NLaunch
 		public string ConfigurationFullPath { get; set; }
 		public string Protocol { get; set; }
 		public string UpdatesLocation { get; set; }
+		public string LocalDirectory { get; set; }
 		public string ApplicationExe { get; set; }
 	}
 }

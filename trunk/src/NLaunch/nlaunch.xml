@@ -7,6 +7,8 @@
   <!-- if protocol=ftp ==> ftp://user:password@server.com/dir -->
   <!-- if protocol=local ==> C:\Updates -->
   <updatesLocation>ftp://user%40server:password123@server.com/</updatesLocation>
+
+  <localDirectory>c:\updates.dir</localDirectory>
   
   <!-- name of the application executable -->
   <applicationExe>Test.App.exe</applicationExe>

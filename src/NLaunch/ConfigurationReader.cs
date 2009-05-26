@@ -46,6 +46,10 @@ namespace NLaunch
 							reader.ReadStartElement();
 							configuration.UpdatesLocation = reader.ReadString();
 						}
+						else if (reader.Name == "localDirectory") {
+							reader.ReadStartElement();
+							configuration.LocalDirectory = reader.ReadString();
+						}
 						else if (reader.Name == "applicationExe")
 						{
 							reader.ReadStartElement();

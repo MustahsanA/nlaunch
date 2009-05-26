@@ -23,7 +23,11 @@ namespace NLaunch.Impl
 
 		public string Download(string filename, IDownloadNotificator notificator)
 		{
-			var localFilename = Path.GetTempPath() + filename;
+			var localDirectory = string.IsNullOrEmpty(configuration.LocalDirectory) == false
+			                     	? configuration.LocalDirectory
+			                     	: Path.GetTempPath();
+
+			var localFilename = Path.Combine(localDirectory, filename);
 			if (File.Exists(localFilename))
 				File.Delete(localFilename);
 

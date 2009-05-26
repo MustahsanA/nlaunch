@@ -48,6 +48,10 @@ namespace NLaunch
 			{
 				// ignore errors when updates provider is inaccessible
 			}
+			catch (Exception ex)
+			{
+				// should log exception using log4net
+			}
 
 			Process.Start(config.ApplicationExe);
 		}

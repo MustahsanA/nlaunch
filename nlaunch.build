@@ -68,7 +68,7 @@
 
 	<property name="project.output.dir" value="${app.dir}\NLaunch\bin\${project.config}" />
 	<exec program="${ilmerge.dir}\ilmerge.exe"
-		  commandline="/target:winexe /ndebug /out:${build.dir}\nlaunch.exe ${project.output.dir}\nlaunch.exe ${project.output.dir}\ICSharpCode.SharpZipLib.dll" />
+		  commandline="/target:winexe /ndebug /out:${build.dir}\nlaunch.exe ${project.output.dir}\nlaunch.exe ${project.output.dir}\ICSharpCode.SharpZipLib.dll ${project.output.dir}\log4net.dll" />
 	<copy todir="${build.dir}">
 		<fileset basedir="${project.output.dir}">
 			<include name="nlaunch.xml" />

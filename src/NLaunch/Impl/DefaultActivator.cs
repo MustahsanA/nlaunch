@@ -61,7 +61,10 @@ namespace NLaunch.Impl
 			// restore application configuration from previous version
 			var appConfigFilename = configuration.ApplicationExe + ".config";
 			var previousConfiguration = Path.Combine(backupDirectory, appConfigFilename);
-			File.Copy(previousConfiguration, appConfigFilename, true);
+			if (File.Exists(previousConfiguration))
+			{
+				File.Copy(previousConfiguration, appConfigFilename, true);
+			}
 		}
 	}
 

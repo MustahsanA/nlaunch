@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using log4net;
 
 namespace NLaunch.Impl
 {
 	public class FtpAccessor : IFtpAccessor
 	{
+		private static readonly ILog log = LogManager.GetLogger(typeof (FtpAccessor));
+
 		private readonly Uri serverUri;
 
 		public FtpAccessor(string stringUri)
@@ -17,6 +20,8 @@ namespace NLaunch.Impl
 		public IEnumerable<string> ListFiles()
 		{
 			FtpWebResponse response = null;
+
+			log.Debug("Listing files from " + serverUri);
 
 			try
 			{
@@ -32,6 +37,7 @@ namespace NLaunch.Impl
 			}
 			catch (WebException ex)
 			{
+				log.Warn("Cannot list files", ex);
 				throw new UpdatesProviderInaccessibleException("Cannot list files", ex);
 			}
 			finally
@@ -46,6 +52,8 @@ namespace NLaunch.Impl
 			FtpWebResponse response2 = null;
 			FileStream outputStream = null;
 			Stream responseStream = null;
+
+			log.DebugFormat("Downloading file {0} with local name {1} from {2}", remoteFilename, localFilename, serverUri);
 
 			try
 			{
@@ -79,6 +87,7 @@ namespace NLaunch.Impl
 			}
 			catch (WebException ex)
 			{
+				log.Warn("Cannot download update", ex);
 				throw new UpdatesProviderInaccessibleException("Cannot download update", ex);
 			}
 			finally

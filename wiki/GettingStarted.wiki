@@ -29,11 +29,11 @@ Once that the version of the last updated is obtained, it is compared with the v
 *2. If acording to the versions information an update is required, then the update is downloaded and activated.* This is done through the the following steps:
   * downloads (or copy) the zip file containing the update to a local temp directory
   * copy the contents of the existing installation into a subdirectory called `PreviousVersion` within the application directory
-  * deletes everything that does not belong to nhlaunch itself
+  * deletes everything that does not belong to nlaunch itself
   * unzip the downloaded zip file to the application target directory
   * restores previous application configuration (Test.App.exe.config in this case) from the `PreviousVersion` directory
 
 *3. The original application is launched and NLaunch ends its work.*
 
 ===Deploying updates===
-To deploy un update, just copy a new file named after the right convention (`Test.App-1.2.0.0.zip`) and the next time that the user starts your application, it will be downloaded and installed.
+To deploy an update, just copy a new file named after the right convention (`Test.App-1.2.0.0.zip`) and the next time that the user starts your application, it will be downloaded and installed.
